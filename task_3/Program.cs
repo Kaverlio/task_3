@@ -20,6 +20,9 @@ namespace task_3
 
         static void Main(string[] args)
         {
+
+            privateKey = KeyGenerate.genPrivateKey();
+
             while (f)
             {
                 if (args.Distinct().Count() != args.Length)
@@ -42,8 +45,7 @@ namespace task_3
                     break;
                 }
 
-                privateKey = KeyGenerate.genPrivateKey();
-                Console.WriteLine(privateKey);
+                Console.WriteLine("HMAC: " + privateKey);
                 Console.WriteLine("Выберете из предложеного списка:");
 
                 foreach(string s in listElements)
@@ -71,8 +73,8 @@ namespace task_3
                             choosePC = args[rnd.Next(0, args.Length - 1)];
                             Console.WriteLine("Компьютер выбрал: " + choosePC);
                             Console.WriteLine(checkWinner(chooseUser, choosePC));
-                            hmac = HMACGenerate.genHMAC(privateKey + choosePC);
-                            Console.WriteLine(hmac);
+                            hmac = HMACGenerate.genHMAC(chooseUser, privateKey);
+                            Console.WriteLine("HMAC key: " + hmac + "\n\n\n");
                             listElements.Clear();
                         }                        
                         break;

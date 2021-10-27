@@ -9,16 +9,22 @@ namespace task_3
 {
     class HMACGenerate
     {
-        public static string genHMAC(string stringvalue)
+        public static string genHMAC(string text, string key)
         {
-            var encodedvalue = Encoding.Unicode.GetBytes(stringvalue);
-            using (HashAlgorithm ssp = HashAlgorithm.Create("SHA256"))
+            //var encodedvalue = Encoding.Unicode.GetBytes(stringvalue);
+            //using (HashAlgorithm ssp = HashAlgorithm.Create("SHA256"))
+            //{
+
+            //    var digest = ssp.ComputeHash(encodedvalue);
+
+            //    return BitConverter.ToString(digest).Replace("-", "").\;
+
+            //}
+
+            using (var hmacsha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
             {
-
-                var digest = ssp.ComputeHash(encodedvalue);
-
-                return BitConverter.ToString(digest).Replace("-", "");
-
+                var hash = hmacsha256.ComputeHash(Encoding.Unicode.GetBytes(text));
+                return BitConverter.ToString(hash).Replace("-", "");
             }
         }
     }

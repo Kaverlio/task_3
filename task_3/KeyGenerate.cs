@@ -11,7 +11,7 @@ namespace task_3
     {
         public static string genPrivateKey()
         {
-            byte[] random = new Byte[16];
+            byte[] random = new Byte[32];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             rng.GetBytes(random);
             return BitConverter.ToString(random).Replace("-", "");
