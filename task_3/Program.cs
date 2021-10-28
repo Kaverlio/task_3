@@ -45,7 +45,9 @@ namespace task_3
                     break;
                 }
 
-                Console.WriteLine("HMAC: " + privateKey);
+                choosePC = args[rnd.Next(0, args.Length - 1)];
+                hmac = HMACGenerate.genHMAC(choosePC, privateKey);
+                Console.WriteLine("HMAC: " + hmac);
                 Console.WriteLine("Выберете из предложеного списка:");
 
                 foreach(string s in listElements)
@@ -70,11 +72,10 @@ namespace task_3
                         if (listElements.Contains(chooseUser))
                         {
                             Console.WriteLine("Вы выбрали: " + chooseUser);
-                            choosePC = args[rnd.Next(0, args.Length - 1)];
                             Console.WriteLine("Компьютер выбрал: " + choosePC);
                             Console.WriteLine(checkWinner(chooseUser, choosePC));
-                            hmac = HMACGenerate.genHMAC(chooseUser, privateKey);
-                            Console.WriteLine("HMAC key: " + hmac + "\n\n\n");
+                            
+                            Console.WriteLine("HMAC key: " + privateKey + "\n\n\n");
                             listElements.Clear();
                         }                        
                         break;
